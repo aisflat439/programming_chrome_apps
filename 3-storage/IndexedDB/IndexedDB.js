@@ -276,8 +276,16 @@ document.querySelector("#save").addEventListener("click",
 			.onsuccess = function (event) {
 				showMessage('Added', true);
 			};
+			key++;
+			document.querySelector("#field-primaryKey").value = key;
 		}
 		else {
+			// This code doesn't run as written 
+			// you can just save over and over. 
+			// I add an update to the field-primary key
+			// then this code runs and you can't save multiple 
+			// copies. 
+			// I don't think my solution is very good. yet but I"m woking on it.
 			store
 			.put(object, primaryKey)
 			.onsuccess = function (event) {
