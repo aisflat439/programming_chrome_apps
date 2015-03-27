@@ -268,30 +268,38 @@ document.querySelector("#save").addEventListener("click",
 			.transaction("mailing-list", "readwrite")
 			.objectStore("mailing-list");
 		var object = getForm();
-		var key = document.querySelector("#field-primaryKey").value;
+		//var key = document.querySelector("#field-primaryKey").value;
+		//showMessage("object.primaryKey + " + object.primaryKey);
+		var key = object.primaryKey;
 		var primaryKey = key ? parseInt(key) : 0;
-		// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 273");
+		showMessage("Primary Key = " + primaryKey + " key = " + key + " line 273");
 		if (primaryKey === 0) {
-			// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 275");
+			showMessage("Primary Key = " + primaryKey + " key = " + key + " line 275");
 			store
 			.add(object)
 			.onsuccess = function (event) {
 				showMessage('Added', true);
 			};
-			// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 281");
-			key++;
-			document.querySelector("#field-primaryKey").value = key;
+			showMessage("Primary Key = " + primaryKey + " key = " + key + " line 281");
+			
+			document.querySelector("#field-primaryKey").value = object.primaryKey;
+			showMessage("Primary Key = " + primaryKey + " key = " + key + " line 286");
+			showMessage("object.primaryKey + " + object.primaryKey);
+			showMessage("****bject.primaryKey + " + parseInt(object.primaryKey));				
 		}
 		else {
-			// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 286");
+			showMessage("Primary Key = " + primaryKey + " key = " + key + " line 291");
 			store
 			.put(object, primaryKey)
 			.onsuccess = function (event) {
 				showMessage('Updated', true);
 			};
-			document.querySelector("#field-primaryKey").value = primaryKey;
+			//document.querySelector("#field-primaryKey").value = primaryKey;
 		}
-	// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 294");
+	fillForm();
+	fillForm(object);
+	//showMessage("object.primaryKey + " + parseInt(object.primaryKey));
+	//showMessage("Primary Key = " + primaryKey + " key = " + key + " line 300");
 	}
 );
 //end
@@ -326,7 +334,7 @@ function getForm() {
 		state: document.querySelector("#field-state").value,
 		zip: document.querySelector("#field-zip").value,
 		email: document.querySelector("#field-email").value,
-		pk: document.querySelector("#field-primaryKey").value
+		primaryKey: document.querySelector("#field-primaryKey").value
 	};
 }
 
