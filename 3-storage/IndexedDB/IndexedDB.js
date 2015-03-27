@@ -270,28 +270,28 @@ document.querySelector("#save").addEventListener("click",
 		var object = getForm();
 		var key = document.querySelector("#field-primaryKey").value;
 		var primaryKey = key ? parseInt(key) : 0;
+		// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 273");
 		if (primaryKey === 0) {
+			// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 275");
 			store
 			.add(object)
 			.onsuccess = function (event) {
 				showMessage('Added', true);
 			};
+			// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 281");
 			key++;
 			document.querySelector("#field-primaryKey").value = key;
 		}
 		else {
-			// This code doesn't run as written 
-			// you can just save over and over. 
-			// I add an update to the field-primary key
-			// then this code runs and you can't save multiple 
-			// copies. 
-			// I don't think my solution is very good. yet but I"m woking on it.
+			// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 286");
 			store
 			.put(object, primaryKey)
 			.onsuccess = function (event) {
 				showMessage('Updated', true);
 			};
+			document.querySelector("#field-primaryKey").value = primaryKey;
 		}
+	// showMessage("Primary Key = " + primaryKey + " key = " + key + " line 294");
 	}
 );
 //end
@@ -325,7 +325,8 @@ function getForm() {
 		city: document.querySelector("#field-city").value,
 		state: document.querySelector("#field-state").value,
 		zip: document.querySelector("#field-zip").value,
-		email: document.querySelector("#field-email").value
+		email: document.querySelector("#field-email").value,
+		pk: document.querySelector("#field-primaryKey").value
 	};
 }
 
